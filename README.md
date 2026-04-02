@@ -2,9 +2,9 @@
 HttpSpy made in Luau that tracks requests being sent to an endpoint (GET, or POST)
 
 ```mermaid
-graph LR
-A[Request Gets Sent] --> B[HttpSpy Catches Request]
-B --> C[Prompt User: Allow Sending?]
+graph TD
+A[Request sent] --> B[HttpSpy catches requests]
+B --> C[HttpSpy prompts user: Allow connection to endpoint?]
 C -->|Yes| D[Request Sent]
 C -->|No| E[Request Blocked]
 ```
