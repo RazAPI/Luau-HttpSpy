@@ -266,7 +266,7 @@ end
 
 getgenv().game = HttpSpyDeps.WrapUserData(HttpSpySources.DataModel, function(self, Index)
     if Index == "HttpGet" then
-        return function(Url)
+        return function(self, Url)
             assert(type(Url) == "string", `[ HttpSpy ] invalid argument #1 to HttpGet, expected string got {type(Url)}`)
 
             PrintConsole(1, `[ HttpSpy - Connection (GET) ]: Send GET request to {Url}?\n\n(Press Insert key to Allow, Press Delete key to Abort/Cancel)`)
@@ -314,7 +314,7 @@ getgenv().game = HttpSpyDeps.WrapUserData(HttpSpySources.DataModel, function(sel
         end
 
     elseif Index == "HttpPost" then
-        return function(Url, Body, Headers)
+        return function(self, Url, Body, Headers)
             assert(type(Url) == "string", `[HttpSpy] invalid argument #1 to HttpPost, expected string got {type(Url)}`)
 
             PrintConsole(1, `[HttpSpy - Connection (POST)]: Send POST request to {Url}? (Insert = Allow, Delete = Abort)`)
