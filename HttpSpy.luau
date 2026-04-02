@@ -1,7 +1,8 @@
 --[[
     Filename.: HttpSpy.luau
     Description.: HttpSpy that sends detailed information of an HTTP Request, this is for low level executors \\ externals executors.
-    Author.: lucibedroque \\ RazAPIx64 \\ RazAPI \\ Raz \\ Lucien
+    Author.: lucibedroque \\ RazAPIx64 \\ RazAPI \\ Raz \\ Lucien,
+	Credits.: laera/laeraz (debugging)
 ]]
 
 local PrintConsole = function(Option, ...)
@@ -228,7 +229,7 @@ getgenv().request = function(Options)
                         Headers = HttpService:JSONEncode({
                             ["user-agent"] = HttpSpyConfig.SetUserAgent
                         })
-                    })
+                    }).Body
                 end)
 
                 local Took = math.floor((os.clock() - StartTime) * 1000)
@@ -238,7 +239,7 @@ getgenv().request = function(Options)
                 end
 
                 if Success then
-                    return Result
+                    return Result.Body
                 else
                     PrintConsole(2, `[HttpSpy - VSE]: Failed to set user-agent.`)
                 end
@@ -254,7 +255,7 @@ getgenv().request = function(Options)
                     State.ConfirmText.Text = State.ConfirmText.Text .. `\n\nFinished in {Took} ms`
                 end
 
-                return Result
+                return Result.Body
             end
         else
             PrintConsole(2, `[ HttpSpy - Connection ]: {Options.Method} request to {Options.Url} cancelled`)
@@ -291,7 +292,7 @@ getgenv().game = HttpSpyDeps.WrapUserData(HttpSpySources.DataModel, function(sel
                     end
 
                     if Success then
-                        return Result
+                        return Result.Body
                     else
                         PrintConsole(2, `[HttpSpy - VSE ]: Failed to set user-agent to {HttpSpyConfig.SetUserAgent}, your current exploit does not allow you to change headers.`)
                     end
@@ -306,7 +307,7 @@ getgenv().game = HttpSpyDeps.WrapUserData(HttpSpySources.DataModel, function(sel
                         State.ConfirmText.Text = State.ConfirmText.Text .. `\nFinished in {Took} ms`
                     end
 
-                    return Result
+                    return Result.Body
                 end
             else
                 PrintConsole(2, `[ HttpSpy - Connection ]: GET request to {Url} cancelled`)
@@ -340,7 +341,7 @@ getgenv().game = HttpSpyDeps.WrapUserData(HttpSpySources.DataModel, function(sel
                     end
 
                     if Success then 
-                        return Result
+                        return Result.Body
                     else
                         PrintConsole(2, `[HttpSpy - VSE ]: Failed to set user-agent to {HttpSpyConfig.SetUserAgent}, your current exploit does not allow you to change headers.`) 
                     end
@@ -357,7 +358,7 @@ getgenv().game = HttpSpyDeps.WrapUserData(HttpSpySources.DataModel, function(sel
                         State.ConfirmText.Text = State.ConfirmText.Text .. `\nFinished in {Took} ms`
                     end
 
-                    return Result
+                    return Result.Body
                 end
             else
                 PrintConsole(2, `[HttpSpy]: POST request to {Url} cancelled`)
