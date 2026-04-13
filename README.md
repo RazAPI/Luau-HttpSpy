@@ -1,6 +1,7 @@
 # Luau-HttpSpy
 HttpSpy made in Luau that tracks requests being sent to an endpoint (GET, or POST)
 
+**Version** 1.1.5
 ```mermaid
 graph TD
 A[Request Sent] --> B[HttpSpy Catches Request]
