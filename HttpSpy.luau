@@ -15,7 +15,7 @@ end
 local PrintConsole = function(Option, ...)
     assert(Option < 4, "No options above 3")
 
-    local Options = {[1] = print, [2] = warn, [3] = error}
+    local Options = {[1] = print, [2] = warn}
     if not Options[Option] then return "Invalid Option" end
 
     return Options[Option](...)
