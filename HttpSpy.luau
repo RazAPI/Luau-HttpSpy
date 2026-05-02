@@ -55,8 +55,10 @@ local HttpSpyConfig = { ["SetUserAgent"] = false }
 HttpSpyDeps.WrapUserData = function(IndexModify, NewIndexModify)
     local Proxy = newproxy(true)
     local Metatable = getmetatable(Proxy)
+    
     Metatable.__index = IndexModify
     Metatable.__newindex = NewIndexModify
+
     return Proxy
 end
 
@@ -150,7 +152,6 @@ getgenv().game = HttpSpyDeps.WrapUserData(HttpSpySources.DataModel, function(sel
                 PrintConsole(2, `[ HttpSpy ]: GET request to {Url} cancelled.`)
             end
         end
-
     elseif Index == "HttpPost" then
         return function(self, Url, Body, Headers)
             assert(type(Url) == "string", `[ HttpSpy ] invalid argument #1 to HttpPost, expected string got {type(Url)}`)
